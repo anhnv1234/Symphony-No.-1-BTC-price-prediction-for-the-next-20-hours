@@ -1,80 +1,105 @@
-```markdown
-# Symphony No.1 — Dự đoán giá BTC cho 20 giờ tiếp theo (Generative Time-Series)
-<img width="1918" height="767" alt="image" src="https://github.com/user-attachments/assets/666a26c3-3938-425c-a790-d75aef1b85c9" />
+# 🏗️ KIẾN TRÚC HỆ THỐNG: GENERATIVE AI TRADING BOT (V53z)
 
-Hệ thống này không phải là bot "dự đoán lên/xuống" đơn thuần (classification). Đây là một "Máy Vẽ Tương Lai" — một hệ thống generative time-series forecasting, cố gắng sinh ra các kịch bản giá khả thi cho 20 cây nến tiếp theo dựa trên nhiều góc nhìn.
-
-## 1. Đầu vào (Input)
-Hệ thống "ăn" một lượng dữ liệu lớn để hiểu bối cảnh thị trường:
-
-- Nguồn dữ liệu:
-  - Binance (W1, D1, H1, M15)
-  - Bitstamp (lịch sử xa)
-  - FRED (dữ liệu kinh tế vĩ mô của Mỹ)
-- Tổng quan đặc trưng:
-  - 53 features bao gồm:
-    - Giá (OHLCV)
-    - Chỉ báo kỹ thuật: RSI, MACD, Bollinger Bands, SMA, EMA, ...
-    - Dữ liệu vĩ mô: lãi suất FED, CPI, bảng cân đối, ...
-    - Hành vi thông minh: Smart Money Concepts (FVG), ...
-- Khung nhìn lịch sử (lookback):
-  - Ngắn hạn: 50 nến
-  - Dài hạn / 1 tuần: 168 nến
+## 1. TỔNG QUAN DỰ ÁN
+Hệ thống là một **Cỗ máy Dự báo Chuỗi Thời gian Tạo sinh (Generative Time-Series Forecasting Engine)** dành cho Bitcoin (BTC).
+Khác với các bot truyền thống chỉ dự báo xu hướng (Lên/Xuống), hệ thống này **vẽ ra kịch bản đường giá** (Price Trajectory) cho 20 giờ tiếp theo dựa trên sự đồng thuận của 3 mô hình Deep Learning tiên tiến.
 
 ---
 
-## 2. Bộ não trung tâm (Core Models — "Hội đồng tham mưu")
-Ba mô hình AI vận hành đồng thời, mỗi mô hình có phong cách và điểm mạnh riêng:
+## 2. 🧠 TRÁI TIM HỆ THỐNG: "TAM ĐẠI CỐT LÕI" (THE THREE BRAINS)
 
-1. CVAE-LSTM (Màu Xanh Dương)
-   - Công nghệ: CVAE kết hợp LSTM
-   - Tính cách: Thận trọng, ổn định — thường dự báo theo xu hướng chính, ít nhiễu.
+Hệ thống hoạt động như một **"Hội Đồng Tham Mưu"**, nơi 3 bộ não với kiến trúc khác biệt cùng phân tích dữ liệu:
 
-2. TimeGAN (Màu Xanh Lá)
-   - Công nghệ: Generative Adversarial Networks cho chuỗi thời gian
-   - Tính cách: Nghệ sĩ, nắm bắt tốt biến động mạnh (volatility) nhưng có xu hướng quá đà => cần cơ chế giảm xóc (damping).
+### A. Não 1: CVAE-LSTM (The Stabilizer - Kẻ Ổn Định)
+* **Vai trò:** "Mỏ neo" tâm lý, giữ cho dự báo bám sát xu hướng chính.
+* **Công nghệ:** Kết hợp **CVAE** (Conditional Variational Autoencoder) để nén dữ liệu thành xác suất và **LSTM** (Long Short-Term Memory) để ghi nhớ chuỗi thời gian.
+* **Đặc điểm:** Dự báo mượt mà, ít nhiễu, độ tin cậy cao trong thị trường đi ngang (Sideway).
 
-3. TCVAE — Transformer + CVAE (Màu Đỏ)
-   - Công nghệ: Kiến trúc Transformer kết hợp CVAE, dùng cơ chế Attention
-   - Tính cách: Nhìn xa trông rộng, phát hiện mối liên hệ phức tạp mà LSTM có thể bỏ sót.
+### B. Não 2: TimeGAN (The Artist - Kẻ Phá Cách)
+* **Vai trò:** "Cảm nhận" nhịp điệu và xung lực thị trường.
+* **Công nghệ:** **GAN** (Generative Adversarial Networks - Mạng đối nghịch). Hai mạng con (Generator & Discriminator) đấu nhau để học cách tạo ra dữ liệu giả giống thật nhất.
+* **Đặc điểm:** Rất nhạy với biến động mạnh (Volatility). Tuy nhiên, do hay "phóng đại" nên cần cơ chế "Giảm Xóc" (Damping) và "Làm Mượt" (Smoothing).
 
----
-
-## 3. Cơ chế vận hành (Workflow)
-
-1. Tiền xử lý (Data pipeline)
-   - Tải nến mới nhất
-   - Vá gap (hot fix)
-   - Tính 53 chỉ báo
-   - Scale dữ liệu (chuẩn hoá về 0–1)
-
-2. Sinh kịch bản (Generation)
-   - Dữ liệu đầu vào được đưa vào 3 mô hình.
-   - Mỗi mô hình sinh một vector ngẫu nhiên (z-space) và giải mã thành 20 cây nến tương lai.
-
-3. Hậu kỳ (Post-processing)
-   - Relative projection: Chỉ quan tâm đến tỷ lệ thay đổi (%) mà mô hình dự đoán, không quan tâm mức giá tuyệt đối.
-   - Anchoring (Neo giá): Áp tỷ lệ phần trăm dự báo vào giá hiện tại để đường dự báo liền mạch với nến hiện tại.
-   - Damping (Giảm xóc): Giảm biên độ dự báo của TimeGAN để tránh dự báo quá cực đoan.
-   - Pattern matching (Soi gương): Dùng thư viện stumpy để quét lịch sử BTC từ 2019, tìm 3 giai đoạn có đường giá tương tự (Top-3 similar patterns) để tham khảo — "lấy sử làm gương".
+### C. Não 3: TCVAE (Transformer CVAE - The Visionary - Kẻ Nhìn Xa)
+* **Vai trò:** Phát hiện các mối liên hệ phức tạp và dài hạn.
+* **Công nghệ:** Áp dụng kiến trúc **Transformer** (cơ chế Self-Attention giống ChatGPT) kết hợp CVAE.
+* **Đặc điểm:** Có khả năng nhìn toàn cảnh bức tranh thị trường (53 chỉ báo) cùng lúc, phát hiện ra các cấu trúc giá mà LSTM có thể bỏ sót.
 
 ---
 
-## 4. Đầu ra (Output)
-Người dùng nhận được một tấm ảnh/biểu đồ tổng hợp gồm:
+## 3. 📂 CẤU TRÚC FILE & CHỨC NĂNG
 
-- Biểu đồ chính:
-  - Nến hiện tại
-  - 3 đường kịch bản dự báo (Xanh dương — CVAE-LSTM, Xanh lá — TimeGAN, Đỏ — TCVAE)
-  - Volume hiển thị overlay
-- 3 biểu đồ phụ:
-  - 3 giai đoạn lịch sử giống nhất để tham khảo
+Hệ thống được tối ưu hóa chỉ còn 4 file code chính cần quản lý:
 
-Tóm lại: Hệ thống là sự tổng hợp giữa mô hình generative AI và thống kê để vẽ ra các kịch bản tương lai khả thi từ nhiều góc nhìn khác nhau.
+| Nhóm | Tên File | Chức năng Chi tiết |
+| :--- | :--- | :--- |
+| **SỐNG CÒN** | **`05_live_bot_V53_ALL.py`** | **TRÙM CUỐI (Main Execution):**<br>- Điều phối toàn bộ hoạt động.<br>- Chạy vòng lặp thời gian thực (Real-time Loop).<br>- Thực hiện hậu kỳ (Post-processing) và vẽ biểu đồ. |
+| **HẬU CẦN** | **`data_service.py`** | **QUẢN LÝ DỮ LIỆU:**<br>- Hút nến từ Binance (W1, D1, H1, M15).<br>- Hút dữ liệu vĩ mô (FRED) & On-chain (Bitstamp).<br>- **Hot Fix:** Cập nhật nóng 20 nến mới nhất.<br>- Tính toán 53 chỉ báo kỹ thuật. |
+| **LÒ LUYỆN** | **`03_train_cvae_V14_H1_ONLY.py`** | **TẠO NÃO 1 & SCALER:**<br>- Huấn luyện CVAE-LSTM.<br>- **Quan trọng:** Tạo ra file `cvae_scaler_V23.gz` (Máy ép dữ liệu dùng chung). |
+| **LÒ LUYỆN** | **`04_train_transformer_cvae_V1.py`** | **TẠO NÃO 3:**<br>- Huấn luyện mô hình TCVAE. |
 
 ---
 
-## Ghi chú
-- Mục tiêu của hệ thống là tạo kịch bản khả thi, không phải đưa ra lời khuyên giao dịch chắc chắn.
-- Kết quả là probabilistic — luôn có rủi ro; hãy sử dụng kết hợp quản trị rủi ro và phán đoán của con người.
-```
+## 4. 🔄 DÒNG CHẢY DỮ LIỆU (DATA FLOW) & QUY TRÌNH VẬN HÀNH
+
+Để chạy hệ thống từ con số 0, thực hiện theo đúng thứ tự sau:
+
+### GIAI ĐOẠN 1: CHUẨN BỊ DỮ LIỆU (DATA PREP)
+1.  **Chạy `data_service.py` (Mode 1):** Tải lịch sử nến Binance (4 khung thời gian).
+2.  **Chạy `data_service.py` (Mode 1.5):** Tải lịch sử Bitstamp (từ 2013).
+3.  **Chạy `data_service.py` (Mode 2):** Gộp tất cả, tính toán chỉ báo -> Tạo ra file `02_Master_Data/btcusdt_master_data.parquet`.
+
+### GIAI ĐOẠN 2: HUẤN LUYỆN (TRAINING)
+*Bước này tạo ra "Trí Khôn" cho Bot.*
+1.  **Chạy `03_train_cvae_V14...py`:**
+    * Input: Master Data.
+    * Output: `cvae_decoder_V11...pth` (Model) + **`cvae_scaler_V23.gz`** (Scaler).
+2.  **Chạy `04_train_transformer...py`:**
+    * Input: Master Data + Scaler V23.
+    * Output: `transformer_cvae_decoder_V13...pth`.
+
+### GIAI ĐOẠN 3: VẬN HÀNH LIVE (RUNTIME)
+*Chạy `05_live_bot_V53_ALL.py`.*
+
+**Quy trình xử lý mỗi giờ:**
+1.  **Hot Patching (Vá Nóng):** Tải ngay 20 nến H1 mới nhất từ sàn, ghi đè vào dữ liệu cũ để triệt tiêu độ trễ.
+2.  **Re-Build Master:** Tính toán lại các chỉ báo cho dữ liệu mới nhất.
+3.  **Gap Filling:** Tự động phát hiện và trám các khoảng trống thời gian (nến thiếu).
+4.  **Scaling (Ép Khuôn):** Dùng `cvae_scaler_V23` ép dữ liệu về khoảng [0, 1].
+5.  **Generation (Mơ):** 3 Não (CVAE, TimeGAN, TCVAE) sinh ra kịch bản tương lai (dạng số nén).
+6.  **Post-Processing (Hậu Kỳ - *Cực quan trọng*):**
+    * **Relative Projection:** Chuyển đổi giá dự báo thành % tăng trưởng.
+    * **Anchoring (Neo Giá):** Áp % tăng trưởng vào giá hiện tại (91k) để nối liền mạch.
+    * **Damping (Giảm Xóc):** Giảm biên độ dao động của TimeGAN xuống 5% để bớt "ảo".
+    * **Smoothing:** Làm mượt đường đi bằng EMA.
+7.  **Pattern Matching:** Dùng `stumpy` quét quá khứ tìm 3 giai đoạn tương đồng nhất (tránh trùng lặp).
+8.  **Visualization:** Vẽ biểu đồ TradingView (Nến + Volume Overlay) ra file ảnh.
+
+---
+
+## 5. 📥 ĐẦU VÀO & 📤 ĐẦU RA
+
+### DỮ LIỆU ĐẦU VÀO (INPUT)
+Hệ thống tiêu thụ **53 đặc trưng (features)** để hiểu thị trường:
+* **Giá & Volume:** Open, High, Low, Close, Volume (H1, M15, D1, W1).
+* **Chỉ báo kỹ thuật:** RSI, MACD, Bollinger Bands, SMA, EMA, Volatility...
+* **Vĩ mô (Macro):** Lãi suất FED, CPI, Bảng cân đối kế toán (từ FRED).
+* **Smart Money Concepts:** FVG (Fair Value Gaps - Vùng mất cân bằng giá).
+
+### KẾT QUẢ ĐẦU RA (OUTPUT)
+File ảnh: `live_prediction_chart_V53_ALL.png`
+* **Biểu đồ Chính:**
+    * Nến thực tế hiện tại.
+    * 3 Đường kịch bản dự báo (Xanh Dương, Đỏ, Xanh Lá) đã được neo giá và làm mượt.
+    * Volume hiển thị dạng Overlay (chồng lên nến) ở đáy biểu đồ.
+* **3 Biểu đồ Phụ:**
+    * Hiển thị 3 giai đoạn lịch sử có đường giá (H1 Close) giống hiện tại nhất.
+    * Có kèm điểm số tương đồng (Score - càng thấp càng giống).
+
+---
+
+## 6. CÁC CƠ CHẾ ĐẶC BIỆT (V53z)
+
+* **Force Align (Ép Cột):** Tự động thêm các cột thiếu (vĩ mô) vào dữ liệu nến mới để khớp với khuôn mẫu của Scaler cũ -> Chống lỗi `sklearn ValueError`.
+* **No Gap Fix:** Tự động cắt bỏ phần dữ liệu thừa ở đuôi và trám các nến thiếu -> Biểu đồ liền mạch, không bị đứt đoạn giữa quá khứ và tương lai.
+* **Overlay Volume:** Hiển thị Volume ngay trên biểu đồ giá bằng trục tung kép (`twinx`), ép tỉ lệ 1/4 để không che khuất nến.
