@@ -3,7 +3,7 @@
 ## 1. TỔNG QUAN DỰ ÁN
 Hệ thống là một **Cỗ máy Dự báo Chuỗi Thời gian Tạo sinh (Generative Time-Series Forecasting Engine)** dành cho Bitcoin (BTC).
 Khác với các bot truyền thống chỉ dự báo xu hướng (Lên/Xuống), hệ thống này **vẽ ra kịch bản đường giá** (Price Trajectory) cho 20 giờ tiếp theo dựa trên sự đồng thuận của 3 mô hình Deep Learning tiên tiến.
-
+<img width="1911" height="772" alt="image" src="https://github.com/user-attachments/assets/8e14f96a-ee5b-45d4-91c1-56821c69034f" />
 ---
 
 ## 2. 🧠 TRÁI TIM HỆ THỐNG: "TAM ĐẠI CỐT LÕI" (THE THREE BRAINS)
