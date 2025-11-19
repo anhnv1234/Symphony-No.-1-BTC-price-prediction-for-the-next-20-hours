@@ -103,3 +103,7 @@ File ảnh: `live_prediction_chart_V53_ALL.png`
 * **Force Align (Ép Cột):** Tự động thêm các cột thiếu (vĩ mô) vào dữ liệu nến mới để khớp với khuôn mẫu của Scaler cũ -> Chống lỗi `sklearn ValueError`.
 * **No Gap Fix:** Tự động cắt bỏ phần dữ liệu thừa ở đuôi và trám các nến thiếu -> Biểu đồ liền mạch, không bị đứt đoạn giữa quá khứ và tương lai.
 * **Overlay Volume:** Hiển thị Volume ngay trên biểu đồ giá bằng trục tung kép (`twinx`), ép tỉ lệ 1/4 để không che khuất nến.
+
+## Vì một số lý do tôi kg thể gửi được các tệp đã train sẵn, nếu bạn cần bạn có thể liên hệ qua với tôi qua email nguyenvietaanh@gmail.com
+
+##
