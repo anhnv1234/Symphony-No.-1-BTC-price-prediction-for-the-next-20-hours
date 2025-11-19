@@ -1,11 +1,8 @@
 ```markdown
 # Symphony No.1 — Dự đoán giá BTC cho 20 giờ tiếp theo (Generative Time-Series)
+<img width="1918" height="767" alt="image" src="https://github.com/user-attachments/assets/666a26c3-3938-425c-a790-d75aef1b85c9" />
 
 Hệ thống này không phải là bot "dự đoán lên/xuống" đơn thuần (classification). Đây là một "Máy Vẽ Tương Lai" — một hệ thống generative time-series forecasting, cố gắng sinh ra các kịch bản giá khả thi cho 20 cây nến tiếp theo dựa trên nhiều góc nhìn.
-<img width="1918" height="771" alt="image" src="https://github.com/user-attachments/assets/6410ac7a-7ada-4b88-9c7c-0ec623271399" />
-
-
----
 
 ## 1. Đầu vào (Input)
 Hệ thống "ăn" một lượng dữ liệu lớn để hiểu bối cảnh thị trường:
