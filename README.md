@@ -1,112 +1,120 @@
-# 🏗️ KIẾN TRÚC HỆ THỐNG: GENERATIVE AI TRADING BOT (V53z)
+# 🚀 CỖ MÁY IN TIỀN CHẠY BẰNG CƠM & AI: TRADING BOT V53z 🚀
 
-## 1. TỔNG QUAN DỰ ÁN
-Hệ thống là một **Cỗ máy Dự báo Chuỗi Thời gian Tạo sinh (Generative Time-Series Forecasting Engine)** dành cho Bitcoin (BTC).
-Khác với các bot truyền thống chỉ dự báo xu hướng (Lên/Xuống), hệ thống này **vẽ ra kịch bản đường giá** (Price Trajectory) cho 20 giờ tiếp theo dựa trên sự đồng thuận của 3 mô hình Deep Learning tiên tiến.
-## Ảnh dụ đoán
+![Badge](https://img.shields.io/badge/Độ_Uy_Tín-Vô_Cực-red) ![Badge](https://img.shields.io/badge/Tâm_Linh-Có_Thờ_Có_Thiêng-yellow) ![Badge](https://img.shields.io/badge/Tech-Deep_Learning_Tối_Thượng-blue)
+
+## 1. LỜI NÓI ĐẦU (INTRO)
+Chào mừng các đồng nghiện đến với **Generative Time-Series Forecasting Engine** (nghe tên Tây cho nó sang mồm thôi, chứ nó là con Bot soi cầu Bitcoin).
+
+Khác với mấy con bot "lùa gà" ngoài kia chỉ biết phán Xanh/Đỏ (Tài/Xỉu), con hàng V53z này là một **Họa Sĩ Thực Thụ**. Nó không đoán mò, nó **vẽ ra đường chạy của giá (Trajectory)** trong 20 giờ tới.
+Tại sao phải đoán giá đóng nến khi bạn có thể vẽ cả cái chart? 😎
+
+### 📸 Ảnh minh họa cho anh em trầm trồ
+*(Nhìn cái đường nó vẽ kìa, uy tín chưa?)*
 <img width="1911" height="772" alt="image" src="https://github.com/user-attachments/assets/8e14f96a-ee5b-45d4-91c1-56821c69034f" />
 
-## ảnh thực thế giá chạy
+### 📉 Thực chiến (Real-time)
+*(Chạy mượt như Sunsilk)*
 <img width="1273" height="617" alt="image" src="https://github.com/user-attachments/assets/c8177350-2f4e-417a-8bf7-2411d7e3e4dc" />
 
-## 2. 🧠 TRÁI TIM HỆ THỐNG: "TAM ĐẠI CỐT LÕI" (THE THREE BRAINS)
+---
 
-Hệ thống hoạt động như một **"Hội Đồng Tham Mưu"**, nơi 3 bộ não với kiến trúc khác biệt cùng phân tích dữ liệu:
+## 2. 🧠 BỘ NÃO QUÁI VẬT: "TAM ĐẠI DANH BỔ"
 
-### A. Não 1: CVAE-LSTM (The Stabilizer - Kẻ Ổn Định)
-* **Vai trò:** "Mỏ neo" tâm lý, giữ cho dự báo bám sát xu hướng chính.
-* **Công nghệ:** Kết hợp **CVAE** (Conditional Variational Autoencoder) để nén dữ liệu thành xác suất và **LSTM** (Long Short-Term Memory) để ghi nhớ chuỗi thời gian.
-* **Đặc điểm:** Dự báo mượt mà, ít nhiễu, độ tin cậy cao trong thị trường đi ngang (Sideway).
+Hệ thống này không dùng 1 não (vì sợ cô đơn), mà dùng **3 bộ não** đấm nhau liên tục để tìm ra chân lý:
 
-### B. Não 2: TimeGAN (The Artist - Kẻ Phá Cách)
-* **Vai trò:** "Cảm nhận" nhịp điệu và xung lực thị trường.
-* **Công nghệ:** **GAN** (Generative Adversarial Networks - Mạng đối nghịch). Hai mạng con (Generator & Discriminator) đấu nhau để học cách tạo ra dữ liệu giả giống thật nhất.
-* **Đặc điểm:** Rất nhạy với biến động mạnh (Volatility). Tuy nhiên, do hay "phóng đại" nên cần cơ chế "Giảm Xóc" (Damping) và "Làm Mượt" (Smoothing).
+### A. Não 1: CVAE-LSTM (Thanh Niên Nghiêm Túc)
+* **Biệt danh:** *The Stabilizer (Kẻ Ổn Định)*.
+* **Tính cách:** Ăn chắc mặc bền, sợ rủi ro. Chuyên trị những lúc thị trường đi ngang (Sideway) buồn ngủ.
+* **Vũ khí:** Lai tạo giữa **CVAE** (nén dữ liệu) và **LSTM** (trí nhớ dai như người yêu cũ).
+* **Tác dụng:** Giữ cho con bot không bị "ngáo" giá.
 
-### C. Não 3: TCVAE (Transformer CVAE - The Visionary - Kẻ Nhìn Xa)
-* **Vai trò:** Phát hiện các mối liên hệ phức tạp và dài hạn.
-* **Công nghệ:** Áp dụng kiến trúc **Transformer** (cơ chế Self-Attention giống ChatGPT) kết hợp CVAE.
-* **Đặc điểm:** Có khả năng nhìn toàn cảnh bức tranh thị trường (53 chỉ báo) cùng lúc, phát hiện ra các cấu trúc giá mà LSTM có thể bỏ sót.
+### B. Não 2: TimeGAN (Nghệ Sĩ Nhân Dân)
+* **Biệt danh:** *The Artist (Kẻ Phá Cách)*.
+* **Tính cách:** Bay bổng, thích cảm giác mạnh. Chuyên trị những cú "Kill Long Diệt Short" biến động mạnh.
+* **Vũ khí:** **GAN** (Mạng đối nghịch). Hai thằng AI tự đấm nhau để học cách lừa người dùng bằng dữ liệu giả giống y như thật.
+* **Tác dụng:** Bắt sóng cực nhanh. Nhưng vì hay "bay" quá nên phải gắn thêm cái "Giảm xóc" (Damping) cho nó bớt ảo.
+
+### C. Não 3: TCVAE (Giáo Sư Biết Tuốt)
+* **Biệt danh:** *The Visionary (Kẻ Nhìn Xa)*.
+* **Tính cách:** Thâm sâu khó lường.
+* **Vũ khí:** **Transformer** (Công nghệ lõi của ChatGPT) kết hợp CVAE.
+* **Tác dụng:** Soi cùng lúc 53 chỉ báo, nhìn thấy những thứ mà mắt thường (và mấy con bot ghẻ) không thấy được.
 
 ---
 
-## 3. 📂 CẤU TRÚC FILE & CHỨC NĂNG
+## 3. 📂 ĐỒ NGHỀ & ĐỆ TỬ (FILE STRUCTURE)
 
-Hệ thống được tối ưu hóa chỉ còn 4 file code chính cần quản lý:
+Code gọn nhẹ, chỉ giữ lại những thằng làm được việc:
 
-| Nhóm | Tên File | Chức năng Chi tiết |
+| Chức vụ | Tên File | Mô tả công việc |
 | :--- | :--- | :--- |
-| **SỐNG CÒN** | **`05_live_bot_V53_ALL.py`** | **TRÙM CUỐI (Main Execution):**<br>- Điều phối toàn bộ hoạt động.<br>- Chạy vòng lặp thời gian thực (Real-time Loop).<br>- Thực hiện hậu kỳ (Post-processing) và vẽ biểu đồ. |
-| **HẬU CẦN** | **`data_service.py`** | **QUẢN LÝ DỮ LIỆU:**<br>- Hút nến từ Binance (W1, D1, H1, M15).<br>- Hút dữ liệu vĩ mô (FRED) & On-chain (Bitstamp).<br>- **Hot Fix:** Cập nhật nóng 20 nến mới nhất.<br>- Tính toán 53 chỉ báo kỹ thuật. |
-| **LÒ LUYỆN** | **`03_train_cvae_V14_H1_ONLY.py`** | **TẠO NÃO 1 & SCALER:**<br>- Huấn luyện CVAE-LSTM.<br>- **Quan trọng:** Tạo ra file `cvae_scaler_V23.gz` (Máy ép dữ liệu dùng chung). |
-| **LÒ LUYỆN** | **`04_train_transformer_cvae_V1.py`** | **TẠO NÃO 3:**<br>- Huấn luyện mô hình TCVAE. |
+| **TRÙM CUỐI** | **`05_live_bot_V53_ALL.py`** | **TỔNG QUẢN:** Điều phối đàn em, chạy real-time, vẽ vời, hậu kỳ. Nói chung là thằng to đầu nhất. |
+| **OSIN CAO CẤP** | **`data_service.py`** | **CULI DỮ LIỆU:** Chuyên đi bốc vác nến từ Binance, số liệu vĩ mô FRED, On-chain... Vá víu dữ liệu hỏng, tính toán 53 chỉ báo. |
+| **LÒ LUYỆN ĐAN** | **`03_train_cvae_V14...py`** | **HUẤN LUYỆN NÃO 1:** Nơi tu luyện CVAE-LSTM. Đặc biệt sản xuất ra cái `Scaler` (máy ép dữ liệu) dùng chung cho cả hội. |
+| **LÒ BÁT QUÁI** | **`04_train_transformer...py`** | **HUẤN LUYỆN NÃO 3:** Nơi tu luyện con quái vật TCVAE. |
 
 ---
 
-## 4. 🔄 DÒNG CHẢY DỮ LIỆU (DATA FLOW) & QUY TRÌNH VẬN HÀNH
+## 4. 🔄 QUY TRÌNH "LUYỆN TỊCH TÀ KIẾM PHỔ"
 
-Để chạy hệ thống từ con số 0, thực hiện theo đúng thứ tự sau:
+Muốn bot chạy ngon thì phải làm đúng quy trình, sai một ly đi một dặm (ra đảo):
 
-### GIAI ĐOẠN 1: CHUẨN BỊ DỮ LIỆU (DATA PREP)
-1.  **Chạy `data_service.py` (Mode 1):** Tải lịch sử nến Binance (4 khung thời gian).
-2.  **Chạy `data_service.py` (Mode 1.5):** Tải lịch sử Bitstamp (từ 2013).
-3.  **Chạy `data_service.py` (Mode 2):** Gộp tất cả, tính toán chỉ báo -> Tạo ra file `02_Master_Data/btcusdt_master_data.parquet`.
+### GIAI ĐOẠN 1: ĐI CHỢ (DATA PREP)
+1.  Sai thằng `data_service` đi tải nến Binance (W1, D1, H1, M15).
+2.  Tải tiếp dữ liệu Bitstamp từ thời đồ đá (2013).
+3.  Gộp hết lại, nêm nếm gia vị (Indicators) -> Ra nồi lẩu thập cẩm `btcusdt_master_data.parquet`.
 
-### GIAI ĐOẠN 2: HUẤN LUYỆN (TRAINING)
-*Bước này tạo ra "Trí Khôn" cho Bot.*
-1.  **Chạy `03_train_cvae_V14...py`:**
-    * Input: Master Data.
-    * Output: `cvae_decoder_V11...pth` (Model) + **`cvae_scaler_V23.gz`** (Scaler).
-2.  **Chạy `04_train_transformer...py`:**
-    * Input: Master Data + Scaler V23.
-    * Output: `transformer_cvae_decoder_V13...pth`.
+### GIAI ĐOẠN 2: TU LUYỆN (TRAINING)
+*Bước này tốn điện + tốn GPU.*
+1.  Chạy file `03` để luyện Não 1. Nhớ giữ kỹ cái **`cvae_scaler_V23.gz`** (mất cái này là ăn cám).
+2.  Chạy file `04` để luyện Não 3.
 
-### GIAI ĐOẠN 3: VẬN HÀNH LIVE (RUNTIME)
-*Chạy `05_live_bot_V53_ALL.py`.*
+### GIAI ĐOẠN 3: RA TRẬN (LIVE RUNTIME)
+*Bật file `05_live_bot_V53_ALL.py` lên và khấn.*
 
-**Quy trình xử lý mỗi giờ:**
-1.  **Hot Patching (Vá Nóng):** Tải ngay 20 nến H1 mới nhất từ sàn, ghi đè vào dữ liệu cũ để triệt tiêu độ trễ.
-2.  **Re-Build Master:** Tính toán lại các chỉ báo cho dữ liệu mới nhất.
-3.  **Gap Filling:** Tự động phát hiện và trám các khoảng trống thời gian (nến thiếu).
-4.  **Scaling (Ép Khuôn):** Dùng `cvae_scaler_V23` ép dữ liệu về khoảng [0, 1].
-5.  **Generation (Mơ):** 3 Não (CVAE, TimeGAN, TCVAE) sinh ra kịch bản tương lai (dạng số nén).
-6.  **Post-Processing (Hậu Kỳ - *Cực quan trọng*):**
-    * **Relative Projection:** Chuyển đổi giá dự báo thành % tăng trưởng.
-    * **Anchoring (Neo Giá):** Áp % tăng trưởng vào giá hiện tại (91k) để nối liền mạch.
-    * **Damping (Giảm Xóc):** Giảm biên độ dao động của TimeGAN xuống 5% để bớt "ảo".
-    * **Smoothing:** Làm mượt đường đi bằng EMA.
-7.  **Pattern Matching:** Dùng `stumpy` quét quá khứ tìm 3 giai đoạn tương đồng nhất (tránh trùng lặp).
-8.  **Visualization:** Vẽ biểu đồ TradingView (Nến + Volume Overlay) ra file ảnh.
+**Vòng lặp mỗi giờ của Bot:**
+1.  **Vá Nóng (Hot Patching):** Tải ngay 20 nến mới nhất đắp vào dữ liệu cũ (chống lag).
+2.  **Trám Lỗ (Gap Filling):** Chỗ nào thiếu nến thì tự bịa... à nhầm, tự tính toán điền vào cho đẹp.
+3.  **Ép Khuôn (Scaling):** Nén hết dữ liệu về dạng [0, 1] cho AI nó dễ nuốt.
+4.  **Mơ (Generation):** 3 thằng Não chụm đầu vào "mơ" về tương lai.
+5.  **Hậu Kỳ (Make-up):**
+    * **Neo Giá:** Lấy % dự báo ốp vào giá hiện tại (91k).
+    * **Giảm Xóc:** Tát cho thằng TimeGAN tỉnh lại (giảm biên độ 5%) kẻo nó hưng phấn quá.
+    * **Làm Mượt:** Vuốt lại đường giá cho nuột nà (EMA).
+6.  **Vẽ Tranh:** Xuất ra cái ảnh `live_prediction_chart` đẹp như mơ.
 
 ---
 
 ## 5. 📥 ĐẦU VÀO & 📤 ĐẦU RA
 
-### DỮ LIỆU ĐẦU VÀO (INPUT)
-Hệ thống tiêu thụ **53 đặc trưng (features)** để hiểu thị trường:
-* **Giá & Volume:** Open, High, Low, Close, Volume (H1, M15, D1, W1).
-* **Chỉ báo kỹ thuật:** RSI, MACD, Bollinger Bands, SMA, EMA, Volatility...
-* **Vĩ mô (Macro):** Lãi suất FED, CPI, Bảng cân đối kế toán (từ FRED).
-* **Smart Money Concepts:** FVG (Fair Value Gaps - Vùng mất cân bằng giá).
+### ĂN GÌ? (INPUT)
+Nó ăn tạp lắm, nuốt **53 loại dữ liệu** khác nhau:
+* Giá nến OHLCV (từ nến Giờ đến nến Tuần).
+* RSI, MACD, Bollinger Bands... (đủ món ăn chơi).
+* Lãi suất FED, CPI (mấy cái tin vĩ mô làm sập thị trường).
+* Smart Money Concept (Vết chân cá mập).
 
-### KẾT QUẢ ĐẦU RA (OUTPUT)
-File ảnh: `live_prediction_chart_V53_ALL.png`
-* **Biểu đồ Chính:**
-    * Nến thực tế hiện tại.
-    * 3 Đường kịch bản dự báo (Xanh Dương, Đỏ, Xanh Lá) đã được neo giá và làm mượt.
-    * Volume hiển thị dạng Overlay (chồng lên nến) ở đáy biểu đồ.
-* **3 Biểu đồ Phụ:**
-    * Hiển thị 3 giai đoạn lịch sử có đường giá (H1 Close) giống hiện tại nhất.
-    * Có kèm điểm số tương đồng (Score - càng thấp càng giống).
+### Ị RA GÌ? (OUTPUT)
+Một file ảnh `live_prediction_chart_V53_ALL.png` chứa đựng tinh hoa vũ trụ:
+* **Đường Chính:** 3 kịch bản giá (Xanh, Đỏ, Tím Vàng gì đó) cho 20h tới.
+* **Volume Overlay:** Volume đè lên nến, nhìn rất chuyên nghiệp.
+* **Quá Khứ Tương Đồng:** Nó lôi lại 3 đoạn lịch sử giống hệt hiện tại để anh em tham khảo (History repeats itself mà lị).
 
 ---
 
-## 6. CÁC CƠ CHẾ ĐẶC BIỆT (V53z)
+## 6. CÔNG NGHỆ ĐỘC QUYỀN (V53z Features)
 
-* **Force Align (Ép Cột):** Tự động thêm các cột thiếu (vĩ mô) vào dữ liệu nến mới để khớp với khuôn mẫu của Scaler cũ -> Chống lỗi `sklearn ValueError`.
-* **No Gap Fix:** Tự động cắt bỏ phần dữ liệu thừa ở đuôi và trám các nến thiếu -> Biểu đồ liền mạch, không bị đứt đoạn giữa quá khứ và tương lai.
-* **Overlay Volume:** Hiển thị Volume ngay trên biểu đồ giá bằng trục tung kép (`twinx`), ép tỉ lệ 1/4 để không che khuất nến.
+* **Force Align (Ép Cột):** Dữ liệu thiếu cột? Kệ, bố mày tự thêm vào cho đủ, miễn là chạy được. Chống crash app cực mạnh.
+* **No Gap Fix:** Cắt đuôi thừa, đắp đầu thiếu. Đảm bảo chart liền mạch không bị gãy khúc như răng bà lão.
+* **Twinx Volume:** Vẽ Volume chồng lên giá nhưng ép xuống tỉ lệ 1/4 đáy màn hình. Đỉnh cao hiển thị (TradingView gọi bằng cụ).
 
-## Vì một số lý do tôi kg thể gửi được các tệp đã train sẵn, nếu bạn cần bạn có thể liên hệ qua với tôi qua email nguyenvietaanh@gmail.com
+---
 
-##
+> **⛔ CẢNH BÁO QUAN TRỌNG:**
+>
+> 1.  Hàng này tôi tự train, tốn bao nhiêu tiền điện nên **KHÔNG SHARE MODEL (Weights)** đâu, đừng xin mất công.
+> 2.  Ai muốn hợp tác làm giàu, hoặc donate tiền cà phê thì liên hệ qua mail bên dưới.
+>
+> 📧 Email chính chủ: **nguyenvietaanh@gmail.com**
+>
+> *"Dùng Bot thì phải tin Bot, còn không tin thì... tự đi mà đánh tay!"*
